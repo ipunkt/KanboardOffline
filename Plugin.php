@@ -5,30 +5,71 @@ namespace Kanboard\Plugin\OfflineKanboardPlugin;
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
 
+/**
+ * @property mixed config
+ */
 class Plugin extends Base
 {
     public function initialize()
     {
+        $user_lang = $this->languageModel->getCurrentLanguage();
+        $theme = $this->configModel->get('theme');
+
+        switch ($user_lang) {
+            case 'de_DE':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-german.css')));
+                break;
+            case 'en_US':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-english.css')));
+                break;
+            case 'pl_PL':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-polish.css')));
+                break;
+            default:
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-english.css')));
+                break;
+        }
 
         $this->template->hook->attach("template:config:sidebar",
             "OfflineKanboardPlugin:config/sidebar");
         $this->route->addRoute('settings/offline', 'OfflineController', 'index',
             'OfflineKanboardPlugin');
+
         $this->hook->on("template:layout:js",
             array("template" => "plugins/OfflineKanboardPlugin/Asset/js/offline.min.js"));
-
-//        if ($this->configModel->get('first_choice', 1) == 1) {
         $this->hook->on("template:layout:css",
             array("template" => "plugins/OfflineKanboardPlugin/Asset/css/offline-theme-chrome.css"));
-        $this->hook->on("template:layout:css",
-            array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-english.css')));
-
-//    }
+        if ($this->configModel->get('snake_game') == 1) {
+            $this->hook->on("template:layout:js",
+                array("template" => "plugins/OfflineKanboardPlugin/Asset/js/snake.js"));
+        }
+        switch ($theme) {
+            case 'chrome':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-theme-chrome.css')));
+                break;
+            case 'dark':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-theme-dark.css')));
+                break;
+            case 'slide':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-theme-slide.css')));
+                break;
+            default:
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-theme-default.css')));
+                break;
+        }
     }
 
     public function onStartup()
     {
-        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
+//        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
     }
 
     public function getPluginName()
