@@ -1,32 +1,39 @@
 <?php
 
-namespace Kanboard\Plugin\offlineKanboardPlugin;
+namespace Kanboard\Plugin\OfflineKanboardPlugin;
 
 use Kanboard\Core\Plugin\Base;
+use Kanboard\Core\Translator;
 
 class Plugin extends Base
 {
     public function initialize()
     {
 
+        $this->template->hook->attach("template:config:sidebar",
+            "OfflineKanboardPlugin:config/sidebar");
+        $this->route->addRoute('settings/offline', 'OfflineController', 'index',
+            'OfflineKanboardPlugin');
         $this->hook->on("template:layout:js",
-            array("template" => "plugins/offlineKanboardPlugin/Asset/js/offline.min.js"));
+            array("template" => "plugins/OfflineKanboardPlugin/Asset/js/offline.min.js"));
 
 //        if ($this->configModel->get('first_choice', 1) == 1) {
         $this->hook->on("template:layout:css",
-            array("template" => "plugins/offlineKanboardPlugin/Asset/css/offline-theme-chrome.css"));
+            array("template" => "plugins/OfflineKanboardPlugin/Asset/css/offline-theme-chrome.css"));
         $this->hook->on("template:layout:css",
-            array("template" => "plugins/offlineKanboardPlugin/Asset/css/offline-language-german.css"));
+            array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-english.css')));
+
 //    }
     }
 
     public function onStartup()
     {
+        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
     }
 
     public function getPluginName()
     {
-        return 'offlineKanboardPlugin';
+        return 'OfflineKanboardPlugin';
     }
 
     public function getPluginDescription()
