@@ -69,8 +69,10 @@ class Plugin extends Base
 
         $this->hook->on("template:layout:js",
             array("template" => "plugins/OfflineKanboardPlugin/Asset/js/offline.min.js"));
-        $this->hook->on("template:layout:css",
-            array("template" => "plugins/OfflineKanboardPlugin/Asset/css/offline-theme-chrome.css"));
+        $this->hook->on("template:layout:js",
+            array("template" => "plugins/OfflineKanboardPlugin/Asset/js/index.js"));
+
+
         if ($this->configModel->get('snake_game') == 1) {
             $this->hook->on("template:layout:js",
                 array("template" => "plugins/OfflineKanboardPlugin/Asset/js/snake.js"));
