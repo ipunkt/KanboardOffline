@@ -28,6 +28,34 @@ class Plugin extends Base
                 $this->hook->on("template:layout:css",
                     array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-polish.css')));
                 break;
+            case 'cs_CZ':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-czech.css')));
+                break;
+            case 'da_DK':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-dutch.css')));
+                break;
+            case 'fr_FR':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-french.css')));
+                break;
+            case 'it_IT':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-italian.css')));
+                break;
+            case 'pt_BR':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-portuguese-brazil.css')));
+                break;
+            case 'es_ES':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-spanish.css')));
+                break;
+            case 'tr_TR':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-turkish.css')));
+                break;
             default:
                 $this->hook->on("template:layout:css",
                     array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-language-english.css')));
@@ -48,6 +76,10 @@ class Plugin extends Base
                 array("template" => "plugins/OfflineKanboardPlugin/Asset/js/snake.js"));
         }
         switch ($theme) {
+            case 'default':
+                $this->hook->on("template:layout:css",
+                    array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-theme-default.css')));
+                break;
             case 'chrome':
                 $this->hook->on("template:layout:css",
                     array("template" => t('plugins/OfflineKanboardPlugin/Asset/css/offline-theme-chrome.css')));
