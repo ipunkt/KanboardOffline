@@ -31,6 +31,9 @@ class OfflineController extends BaseController
             case 'index':
                 $values += array(
                     'snake_game' => 0,
+                    'check_connection' => 0,
+                    'store_remake' => 0,
+                    'monitor_requests' => 0,
                 );
                 break;
         }
@@ -38,6 +41,7 @@ class OfflineController extends BaseController
         if ($this->configModel->save($values)) {
             $this->languageModel->loadCurrentLanguage();
             $this->flash->success(t('Settings saved successfully.'));
+            $this->response->json($values, 200);
         } else {
             $this->flash->failure(t('Unable to save your settings.'));
         }
