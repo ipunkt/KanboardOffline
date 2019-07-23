@@ -1,4 +1,3 @@
-
 let c;
 let s;
 let m;
@@ -12,10 +11,11 @@ function change_values() {
     m = monitor_requests.checked;
 }
 
+Offline.options = {game: true};
+
 document.getElementById('save').onclick = function () {
     change_values();
     Offline.options = {
-        game: true,
         checkOnLoad: c,
         requests: s,
         interceptRequests: m,
