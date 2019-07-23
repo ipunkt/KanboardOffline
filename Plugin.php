@@ -64,19 +64,20 @@ class Plugin extends Base
 
         $this->template->hook->attach("template:config:sidebar",
             "OfflineKanboardPlugin:config/sidebar");
+
         $this->route->addRoute('settings/offline', 'OfflineController', 'index',
             'OfflineKanboardPlugin');
 
         $this->hook->on("template:layout:js",
             array("template" => "plugins/OfflineKanboardPlugin/Asset/js/offline.min.js"));
+
+        $this->route->addRoute('js/offline?', 'OfflineController', 'js',
+            'OfflineKanboardPlugin');
+        $this->hook->on("template:layout:js", array("template" => "js/offline"));
+
         $this->hook->on("template:layout:js",
-            array("template" => "plugins/OfflineKanboardPlugin/Asset/js/index.js"));
+            array("template" => "plugins/OfflineKanboardPlugin/Asset/js/snake.js"));
 
-
-        if ($this->configModel->get('snake_game') == 1) {
-            $this->hook->on("template:layout:js",
-                array("template" => "plugins/OfflineKanboardPlugin/Asset/js/snake.js"));
-        }
         switch ($theme) {
             case 'default':
                 $this->hook->on("template:layout:css",
@@ -103,7 +104,7 @@ class Plugin extends Base
 
     public function onStartup()
     {
-        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
+        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__ . '/Locale');
     }
 
     public function getPluginName()
