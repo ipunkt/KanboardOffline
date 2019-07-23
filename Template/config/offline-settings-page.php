@@ -30,13 +30,11 @@
             $values['store_remake'] == 1) ?>
         <?= $this->form->checkbox('monitor_requests',
             t('Monitor AJAX requests to help decide if we have a connection.'), 1, $values['monitor_requests'] == 1) ?>
-
     </fieldset>
-
 
     <?= $this->hook->render('template:config:offline-settings-page', array('values' => $values, 'errors' => $errors)) ?>
 
     <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
+        <button id="save" type="submit" class="btn btn-blue"><?= t('Save') ?></button>
     </div>
 </form>

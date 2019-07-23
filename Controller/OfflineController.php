@@ -37,17 +37,12 @@ class OfflineController extends BaseController
                 );
                 break;
         }
-
         if ($this->configModel->save($values)) {
             $this->languageModel->loadCurrentLanguage();
             $this->flash->success(t('Settings saved successfully.'));
-            $this->response->json($values, 200);
         } else {
             $this->flash->failure(t('Unable to save your settings.'));
         }
         $this->response->redirect($this->helper->url->to('OfflineController', 'index', array('plugin' => 'OfflineKanboardPlugin')));
     }
-
-
-
 }
