@@ -35,13 +35,16 @@ class OfflineController extends BaseController
         $snake_game = $this->configModel->get('snake_game');
         $snake = ($snake_game == 1) ? 'true' : 'false';
 
+        $initialDelay = $this->configModel->get('initialDelay');
+        $delay = $this->configModel->get('delay');
+
         $data = 'Offline.options = {
                     checkOnLoad: ' . $checkOnLoad . ',
                     requests: ' . $requests . ',
                     interceptRequests: ' . $interceptRequests . ',
                     reconnect: {
-                        initialDelay: 15,
-                        delay: 10
+                        initialDelay:' . $initialDelay . ',
+                        delay: ' . $delay . '
                     },
                     game: ' . $snake . '
         };';

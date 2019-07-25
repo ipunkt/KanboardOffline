@@ -32,6 +32,17 @@
             t('Monitor AJAX requests to help decide if we have a connection.'), 1, $values['monitor_requests'] == 1) ?>
     </fieldset>
 
+    <fieldset>
+        <h4><?= t('Reconnection options') ?></h4>
+        <?= $this->helper->form->label(t('Connection recheck in seconds.'), 'initialDelay');?>
+        <?= $this->form->number('initialDelay', $values); ?>
+        <p class="form-help"><?= t('How many seconds should we wait before rechecking.') ?></p>
+
+        <?= $this->helper->form->label(t('Seconds between retries.'), 'delay');?>
+        <?= $this->form->number('delay', $values); ?>
+        <p class="form-help"><?= t('How long should we wait between retries.') ?></p>
+    </fieldset>
+
     <?= $this->hook->render('template:config:offline-settings-page', array('values' => $values, 'errors' => $errors)) ?>
 
     <div class="form-actions">
