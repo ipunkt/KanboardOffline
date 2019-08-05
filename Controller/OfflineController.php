@@ -29,9 +29,6 @@ class OfflineController extends BaseController
         $store_remake = $this->configModel->get('store_remake');
         $requests = ($store_remake == 1) ? 'true' : 'false';
 
-        $monitor_requests = $this->configModel->get('monitor_requests');
-        $interceptRequests = ($monitor_requests == 1) ? 'true' : 'false';
-
         $snake_game = $this->configModel->get('snake_game');
         $snake = ($snake_game == 1) ? 'true' : 'false';
 
@@ -41,14 +38,13 @@ class OfflineController extends BaseController
         $data = 'Offline.options = {
                     checkOnLoad: ' . $checkOnLoad . ',
                     requests: ' . $requests . ',
-                    interceptRequests: ' . $interceptRequests . ',
                     reconnect: {
                         initialDelay:' . $initialDelay . ',
                         delay: ' . $delay . '
                     },
                     game: ' . $snake . '
         };';
-        $this->response->js($data);
+        $this->response->js($data, 200);
     }
 
     /**
@@ -65,7 +61,6 @@ class OfflineController extends BaseController
                     'snake_game' => 0,
                     'check_connection' => 0,
                     'store_remake' => 0,
-                    'monitor_requests' => 0,
                 );
                 break;
         }

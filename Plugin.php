@@ -68,12 +68,13 @@ class Plugin extends Base
         $this->route->addRoute('settings/offline', 'OfflineController', 'index',
             'OfflineKanboardPlugin');
 
+        $this->route->addRoute('jscript/off-line?', 'OfflineController', 'js',
+            'OfflineKanboardPlugin');
+
         $this->hook->on("template:layout:js",
             array("template" => "plugins/OfflineKanboardPlugin/Asset/js/offline.min.js"));
 
-        $this->route->addRoute('js/offline?', 'OfflineController', 'js',
-            'OfflineKanboardPlugin');
-        $this->hook->on("template:layout:js", array("template" => "js/offline"));
+        $this->hook->on("template:layout:js", array("template" => "jscript/off-line"));
 
         $this->hook->on("template:layout:js",
             array("template" => "plugins/OfflineKanboardPlugin/Asset/js/snake.js"));
